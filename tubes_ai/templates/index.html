@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<!-- Bootstrap JS-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<!-- Custom CSS -->
+		<style>			
+			@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+			body {
+				background-color: #2A2C3A;
+				color: #FFFFFF;
+				font-family: 'PT Sans';
+				font-size: 18px;
+			}
+			.text-red {
+				color: #FD6B85;
+			}
+			.text-cyan {
+				color: #67D4F2;
+			}
+			
+			.text-yellow {
+				color: #FED270;
+			}
+			
+			.bg-gelap {
+				background-color: #2A2C3A;
+				color: #ffffff;
+			}
+		</style>
+		  
+		<title>{% if judul %} {{ judul }} | {% endif %}Technisekai</title>
+	</head>
+	<body>
+		<!-- Title -->
+		<div class="container-fl p-4 vh-100 d-flex align-items-center justify-content-center flex-column">
+			<span class="fs-1 fw-bold text-red text-center">Hate Speech <span class="fs-3 text-cyan">Checker</span></span>
+			<br>
+			<p>"Sebuah project berbasis web yang bertujuan untuk melakukan pengecekkan kalimat yang terdapat <span class="fs-5 fw-bold text-red">hate speech</span>."</p>
+		</div>
+		
+		<!-- input text area-->
+		<div class="container mt-2 text-center ps-5 pe-5">
+		  <label for="exampleFormControlTextarea1" class="form-label mb-4 text-center text-cyan fs-3 fw-bold border-top border-5">Paste <span class="text-yellow">kata-kata</span> yang ingin dicek</label>
+		  <form action = "{{ url_for('index') }}" method = "post">
+			<input type="text" class="form-control bg-dark text-light" name="text-in">
+			<button type="submit" class="btn btn-primary">Kirim</button>
+		  </form>
+		  {% if text_in %} {{ text_in }} {% endif %}
+		</div>
+		
+		<p></p>
+		<p class="fs-4 fw-light text-center"> atau </p>
+		
+		<!-- input file export whatsapp -->
+		<div class="container mt-5 text-center ps-5 pe-5">
+		  <label class="form-label mb-4 text-center fs-3 fw-bold text-cyan border-top border-5">Upload obrolan <span class="text-yellow">whatsapp</span></label>
+		  <div class="input-group mb-3 justify-content-center">
+			  <form action = "{{ url_for('index') }}" method = "post" enctype="multipart/form-data">
+				  <input type="file" class="form-control bg-dark text-light" name="file">
+				  <button type="submit" class="btn btn-primary">Kirim</button>
+			  </form>
+		  </div>
+		</div>
+		
+		<!-- footer -->
+		<footer class="footer bottom mt-5">
+			<div class="container text-center p-4 small">
+				@2021 | <b>Kelompok Gatau</b><br>
+				Powered by <b>Flask & Bootstrap</b>
+			</div>
+		</footer>
+	</body>
+</html>

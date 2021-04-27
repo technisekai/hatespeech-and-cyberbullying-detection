@@ -1,0 +1,6 @@
+Assalamualaikum pak agi,
+maaf mengganggu waktunya, saya Widi Afandi pak dari kelas K.
+saya sudah mencoba mengoptimalkan deteksi objek dan jeruk ini menggunakan mask rcnn dengan library dari gluonCV
+walaupun akurasinya kurang disalah satu gambar namun sudah sedikit berubah dari sebelumnya.
+berikut link notebook saya pak:
+https://colab.research.google.com/drive/1lFrdKSyyVki4QWqwTaT1-Td07NxHc7OV?usp=sharing
