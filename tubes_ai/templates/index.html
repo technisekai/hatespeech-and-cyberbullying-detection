@@ -19,6 +19,11 @@
 				font-family: 'PT Sans';
 				font-size: 18px;
 			}
+			
+			.text-gelap {
+				color: #2A2C3A;
+			}
+			
 			.text-red {
 				color: #FD6B85;
 			}
@@ -34,16 +39,29 @@
 				background-color: #2A2C3A;
 				color: #ffffff;
 			}
+			
+			.bg-red {
+				background-color: #FD6B85;
+			}
+			
+			.bg-yellow {
+				background-color: #FED270;
+			}
+			
+			.bg-cyan {
+				background-color: #67D4F2;
+			}
+			
 		</style>
 		  
-		<title>{% if judul %} {{ judul }} | {% endif %}Technisekai</title>
+		<title>{% if judul %} {{ judul }} | {% endif %}Gatau</title>
 	</head>
 	<body class="container">
 		<!-- Title -->
 		<div class="container-fl p-4 vh-100 d-flex align-items-center justify-content-center flex-column">
 			<div class="row p-5 d-flex align-items-center">
 				<div class="col-sm">
-					<img src="{{ url_for('static', filename='assets/img/thumbnail.png') }}" class="img-fluid">
+					<img src="{{ url_for('static', filename='assets/img/thumbnail1.png') }}" class="img-fluid">
 				</div>
 				<div class="col-sm">
 					<span class="fs-1 fw-bold text-red">Hate Speech <span class="text-cyan">Checker</span></span>
@@ -77,15 +95,23 @@
 					<p class="mt-4 small"> Mari coba fitur menarik dari website ini</p>
 				</div>
 			</div>
-			<div class="row mt-4 ps-5">
+			<div class="row ps-5">
 				<div class="col-sm-6 pe-5 ps-5">
-					<label class="fs-3 fw-bold text-cyan mb-2">Drop teksmu yang ingin <span class="text-yellow">dicek</span></label>
+					<label class="fs-3 fw-bold text-cyan mb-2">Tempel <span class="text-yellow">teksmu</span> yang ingin dicek</label>
 					<form action = "{{ url_for('index') }}" method = "post">
                         <input type="text" class="form-control bg-dark text-light" name="text-in">
                         <br>
                         <button type="submit" class="btn btn-primary">Kirim</button>
 					</form>
-					{% if text_in %} {{ text_in }} {% endif %}
+					{% if text_in %}
+						<div class="card text-white mb-3 mt-3 border-0" style="max-width: 30rem;">
+							<div class="card-header {% if label == 'HATE SPEECH' %} bg-danger {% elif label == 'BULLYING' %} bg-warning {% else %} bg-cyan text-gelap{% endif %}">Result</div>
+							<div class="card-body bg-gelap">
+								<h5 class="card-title fw-bold"> {{ label }}</h5>
+								<p class="card-text">{{ text_in }}</p>
+							</div>
+						</div>
+					{% endif %}
 				</div>
 				<div class="col-sm-6 pe-5 ps-5">
 					<label class="fs-3 fw-bold text-cyan mb-2">Upload chat history <span class="text-yellow">Whatsapp</span></label>
@@ -110,7 +136,7 @@
 				</div>
 				<div class="col-sm-4">
 					<b>Dosen:</b> <br>
-					Bapak Agi Prasetiadi
+					Bapak Agi Prasetiadi, S.T., M.Eng.
 				</div>
 				<div class="col-sm-4">
 					@2021 | <b>Kelompok Gatau</b><br>
