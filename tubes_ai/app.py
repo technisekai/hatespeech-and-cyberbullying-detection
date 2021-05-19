@@ -14,14 +14,45 @@ ALLOWED_EXTENSIONS = {'txt'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def predict(teks):
+def predict_cb(teks):
 	#train dataset
-	train = pd.read_csv('ml/train.csv')
+	train = pd.read_csv('ml/train_cb.csv')
+	label_train = train['Bully'].values
+	tweet_train = train['Comment'].values
+	
+	#test dataset
+	test = pd.read_csv('ml/test_cb.csv')
+	label_test = test['Bully'].values
+	tweet_test = test['Comment'].values
+	
+	#tokenization dataset
+	tokenizer = Tokenizer(num_words=800, oov_token='x')
+	tokenizer.fit_on_texts(tweet_train) 
+	tokenizer.fit_on_texts(tweet_test)
+	sequences_train = tokenizer.texts_to_sequences(tweet_train)
+	sequences_test = tokenizer.texts_to_sequences(tweet_test)
+	padded_train = pad_sequences(sequences_train, maxlen=50, padding='post', truncating='post') 
+	padded_test = pad_sequences(sequences_test, maxlen=50, padding='post', truncating='post')
+	
+	#pretrained model
+	model = tf.keras.models.load_model('ml/model_cb.h5')
+	
+	#predict
+	tokenizer.fit_on_texts(teks)
+	seq = tokenizer.texts_to_sequences(teks)
+	pad = pad_sequences(seq, maxlen=50, padding='post', truncating='post')
+	#print(pad)
+	result = model.predict([pad])
+	return result
+
+def predict_hs(teks):
+	#train dataset
+	train = pd.read_csv('ml/train_hs.csv')
 	label_train = train['HS'].values
 	tweet_train = train['Tweet'].values
 	
 	#test dataset
-	test = pd.read_csv('ml/test.csv')
+	test = pd.read_csv('ml/test_hs.csv')
 	label_test = test['HS'].values
 	tweet_test = test['Tweet'].values
 	
@@ -35,7 +66,7 @@ def predict(teks):
 	padded_test = pad_sequences(sequences_test, maxlen=50, padding='post', truncating='post')
 	
 	#pretrained model
-	model = tf.keras.models.load_model('ml/my_model.h5')
+	model = tf.keras.models.load_model('ml/model_hs.h5')
 	
 	#predict
 	tokenizer.fit_on_texts(teks)
@@ -53,7 +84,7 @@ def allowed_file(filename):
 # Halaman awal
 @app.route('/', methods = ['POST', 'GET'])
 def index():
-	text_in = ''
+	text_in = ' '
 	berkas = ''
 	label = "AMAN"
 	if request.method == 'POST':
@@ -74,11 +105,15 @@ def index():
 	if text_in:
 		text_in = text_in.lower()
 		text_in = [text_in]
-		result = predict(text_in)
+		result_hs = predict_hs(text_in)
+		result_cb = predict_cb(text_in)
 		
-		if (result[0][0] > 0.5):
+		if (result_hs[0][0] > 0.5):
 			label = "HATE SPEECH"
-	
+		elif (result_cb[0][0] > 0.5):
+			label = "BULLYING"
+		else:
+			label = "BIASA"
 	return render_template('index.html', text_in = text_in[0], label = label, berkas = berkas, judul='Home')
     
 
