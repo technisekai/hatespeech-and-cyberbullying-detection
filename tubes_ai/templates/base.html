@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<!-- Bootstrap JS-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<!-- Custom CSS -->
+		<style>			
+			@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+			body {
+				background-color: #2A2C3A;
+				color: #FFFFFF;
+				font-family: 'PT Sans';
+				font-size: 18px;
+			}
+			
+			.text-gelap {
+				color: #2A2C3A;
+			}
+			
+			.text-red {
+				color: #FD6B85;
+			}
+			.text-cyan {
+				color: #67D4F2;
+			}
+			
+			.text-yellow {
+				color: #FED270;
+			}
+			
+			.bg-gelap {
+				background-color: #2A2C3A;
+				color: #ffffff;
+			}
+			
+			.bg-red {
+				background-color: #FD6B85;
+			}
+			
+			.bg-yellow {
+				background-color: #FED270;
+			}
+			
+			.bg-cyan {
+				background-color: #67D4F2;
+			}
+			
+		</style>
+		  
+		<title>{% if judul %} {{ judul }} | {% endif %}Gatau</title>
+	</head>
+	<body class="container">
+		<!-- content -->
+		{% block content %} {% endblock %}
+		
+		<!-- footer -->
+		<div class="container mt-5 p-4 border-top border-5 small">
+			<div class="row">
+				<div class="col-sm-4">
+					<b>Dibuat Oleh:</b> <br>
+					1. Ahmad Saiful Huda<br>
+					2. Bayu Setyaji<br>
+					3. Widi Afandi
+				</div>
+				<div class="col-sm-4">
+					<b>Dosen:</b> <br>
+					Bapak Agi Prasetiadi, S.T., M.Eng.
+				</div>
+				<div class="col-sm-4">
+					@2021 | <b>Kelompok Gatau</b><br>
+					Powered by <b>Flask & Bootstrap</b>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
