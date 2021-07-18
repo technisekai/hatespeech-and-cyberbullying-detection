@@ -4,10 +4,10 @@
 		<div class="container-fl p-4 vh-100 d-flex align-items-center justify-content-center flex-column">
 			<div class="row p-5 d-flex align-items-center">
 				<div class="col-sm">
-					<img src="{{ url_for('static', filename='assets/img/thumbnail1.png') }}" class="img-fluid">
+					<img src="{{ url_for('static', filename='assets/img/thumbnail.png') }}" style="width: 80%;">
 				</div>
 				<div class="col-sm">
-					<span class="fs-1 fw-bold text-red">Hate Speech dan <span class="text-yellow">Cyber Bullying </span><span class="text-cyan">Checker</span></span>
+					<span class="fs-1 fw-bold text-blue">Hate Speech & Cyber Bullying Detection</span>
 					<p class="mt-4">
 						Sebuah program pendeteksi <span class="text-red fw-bold">hate speech</span> dan <span class="text-yellow fw-bold">cyber bullying</span> berbasis web
 					</p>
@@ -16,53 +16,38 @@
 			</div>
 		</div>
 		
-		<div class="container">
-			<div class="row p-5 d-flex align-items-center">
-				<div class="col-sm">
-					<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Apa itu <span class="text-red">Hate Speech dan</span><span class="text-yellow"> Cyber Bullying?</span></label>
-					<p class="mt-4">Ujaran Kebencian <span class="text-red fw-bold">(Hate Speech)</span> adalah perkataan, perilaku, tulisan, ataupun pertunjukan yang dilarang karena dapat memicu terjadinya tindakan kekerasan dan sikap prasangka entah dari pihak pelaku pernyataan tersebut ataupun korban dari tindakan tersebut.
-						<span class="text-yellow fw-bold">Cyberbullying</span> (perundungan dunia maya) ialah bullying/perundungan dengan menggunakan teknologi digital. Hal ini dapat terjadi di media sosial, platform chatting, platform bermain game, dan ponsel.
-					</p>
-				</div>
-				<div class="col-sm text-end">
-					<img src="{{ url_for('static', filename='assets/img/confused-people.png') }}" class="img-fluid">
-				</div>
-			</div>			
-		</div>
-		
-		<div class="container">
-			<div class="row p-5 pb-0 d-flex align-items-center">
-				<div class="col-sm">
-					<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Ayo Coba <span class="text-yellow">Program</span> Ini</label>
-					<p class="mt-4 small"> Mari coba fitur menarik dari website ini</p>
-				</div>
-			</div>
-			<div class="row ps-5">
-				<div class="col-sm-6 pe-5 ps-5">
-					<label class="fs-3 fw-bold text-cyan mb-2">Tempel <span class="text-yellow">teksmu</span> yang ingin dicek</label>
-					<form action = "{{ url_for('index') }}" method = "post">
-                        <input type="text" class="form-control bg-dark text-light" name="text-in">
-                        <br>
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-					</form>
-					{% if text_in %}
-						<div class="card text-white mb-3 mt-3 border-0" style="max-width: 30rem;">
-							<div class="card-header {% if label == 'HATE SPEECH' %} bg-danger {% elif label == 'BULLYING' %} bg-warning {% else %} bg-cyan text-gelap{% endif %}">Result</div>
-							<div class="card-body bg-gelap">
-								<h5 class="card-title fw-bold"> {{ label }}</h5>
-								<p class="card-text">{{ text_in[0] }}</p>
-							</div>
+		<div class="container ps-5 pe-5 text-center">
+			<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Mari Berkenalan dengan Fungsi yang Kami Buat</label>
+			<div class="row row-cols-1 row-cols-md-3 g-4 mt-3 ps-5 pe-5 ">
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 1</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis inputan dari user dan melakukan klasifikasi apakah termasuk hate speech, cyberbullying, atau biasa saja.
+							</p>
 						</div>
-					{% endif %}
+					</div>
 				</div>
-				<div class="col-sm-6 pe-5 ps-5">
-					<label class="fs-3 fw-bold text-cyan mb-2">Upload chat history <span class="text-yellow">Whatsapp</span></label>
-					 <form action = "{{ url_for('wa_analysis') }}" method = "post" enctype="multipart/form-data">
-						<input type="file" class="form-control bg-dark text-light" name="file">
-						<br>
-						<button type="submit" class="btn btn-primary">Kirim</button>
-                     </form>
-					{% if berkas %} {{ berkas }} {% endif %}
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 2</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis chat group whatsapp dari user dan melakukan klasifikasi berapa persen pengguna melakukan hate speech, cyberbullying, dan biasa saja.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 3</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis inputan dari user dan jika terdeteksi hate speech atau cyberbullying maka kalimat akan diubah menjadi makna yang lebih indah.
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

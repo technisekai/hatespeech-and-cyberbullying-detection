@@ -37,7 +37,7 @@ def predict(kategori, teks):
 	model = tf.keras.models.load_model('ml/model_'+ kategori +'.h5')
 	
 	#predict
-	tokenizer.fit_on_texts(teks)
+	#tokenizer.fit_on_texts(teks)
 	seq = tokenizer.texts_to_sequences(teks)
 	pad = pad_sequences(seq, maxlen=50, padding='post', truncating='post')
 

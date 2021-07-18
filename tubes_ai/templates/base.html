@@ -12,22 +12,28 @@
 		<style>			
 			@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 			@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
 			body {
-				background-color: #2A2C3A;
+				background-color: #1B262C;
 				color: #FFFFFF;
 				font-family: 'PT Sans';
 				font-size: 18px;
 			}
 			
 			.text-gelap {
-				color: #2A2C3A;
+				color: #1B262C;
 			}
 			
 			.text-red {
 				color: #FD6B85;
 			}
+			
 			.text-cyan {
 				color: #67D4F2;
+			}
+			
+			.text-blue {
+				color: #00B7C2;
 			}
 			
 			.text-yellow {
@@ -35,7 +41,7 @@
 			}
 			
 			.bg-gelap {
-				background-color: #2A2C3A;
+				background-color: #1B262C;
 				color: #ffffff;
 			}
 			
@@ -56,26 +62,42 @@
 		<title>{% if judul %} {{ judul }} | {% endif %}Gatau</title>
 	</head>
 	<body class="container">
+		<!-- navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark banner mb-5 shadow-sm fixed-top bg-gelap">
+			  <div class="container banner">
+					<a class="navbar-brand fs-3 fw-bold text-blue" href="{{ url_for('index') }}" style="font-family: Open Sans;color: #00B7C2;"><b>Ga.tau</b></a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+						  <ul class="navbar-nav inline">
+								<li class="nav-item me-4">
+								  <a class="nav-link {% if title == 'Home' %} active fw-bold{% endif %}" href="{{ url_for('index') }}">Home</a>
+								</li>
+								<li class="nav-item me-4">
+								  <a class="nav-link {% if title == 'Fungsi 1' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_1') }}">Fungsi 1</a>
+								</li>
+								<li class="nav-item me-4">
+								  <a class="nav-link {% if title == 'Fungsi 2' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_2') }}">Fungsi 2</a>
+								</li>
+								<li class="nav-item me-4">
+								  <a class="nav-link {% if title == 'Fungsi 3' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_3') }}">Fungsi 3</a>
+								</li>
+								<li class="nav-item">
+								  <a class="nav-link {% if title == 'Tentang' %} active fw-bold{% endif %}" href="{{ url_for('tentang') }}">Tentang</a>
+								</li>
+						  </ul>
+					</div>
+			  </div>
+		</nav>
 		<!-- content -->
 		{% block content %} {% endblock %}
 		
 		<!-- footer -->
-		<div class="container mt-5 p-4 border-top border-5 small">
-			<div class="row">
-				<div class="col-sm-4">
-					<b>Dibuat Oleh:</b> <br>
-					1. Ahmad Saiful Huda<br>
-					2. Bayu Setyaji<br>
-					3. Widi Afandi
-				</div>
-				<div class="col-sm-4">
-					<b>Dosen:</b> <br>
-					Bapak Agi Prasetiadi, S.T., M.Eng.
-				</div>
-				<div class="col-sm-4">
-					@2021 | <b>Kelompok Gatau</b><br>
-					Powered by <b>Flask & Bootstrap</b>
-				</div>
+		<div class="container mt-5 p-4 small text-center">
+			<div class="col-sm">
+				@2021 | <b>Kelompok Gatau</b><br>
+				Powered by <b>Flask & Bootstrap</b>
 			</div>
 		</div>
 	</body>
