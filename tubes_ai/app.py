@@ -2,8 +2,8 @@
 import os
 from flask import Flask, render_template, url_for, request
 from werkzeug.utils import secure_filename
-from prediction import *
-from clean_wa import *
+from prediction import * #fungsi 1, 2, 3
+from clean_wa import * #fungsi 2
 
 
 # file upload
@@ -18,11 +18,15 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+#fungsi 3
 def kebalikan(text):
   fungsi3 = pd.read_csv('ml/fungsi3.csv', header=None)
   fungsi3_map = dict(zip(fungsi3[0], fungsi3[1]))
   
   return ' '.join([fungsi3_map[kata] if kata in fungsi3_map else kata for kata in text.split(' ')])
+  
+#mengatur footer
+footer = True
 
 # Halaman awal
 @app.route('/', methods = ['POST', 'GET'])
@@ -50,6 +54,7 @@ def index():
 	
 @app.route('/fungsi_1', methods = ['POST', 'GET'])
 def fungsi_1():
+	footer = True
 	text_in, label, balik = None, None, None
 	if request.method == 'POST':
 		text_in = request.form['text-in']
@@ -59,6 +64,7 @@ def fungsi_1():
 		text_in = [text_in]
 		result_hs = predict('hs', text_in)
 		result_cb = predict('cb', text_in)
+		footer = False
 		
 		if (result_hs[0][0] > 0.5):
 			label = "HATE SPEECH"
@@ -69,11 +75,12 @@ def fungsi_1():
 		else:
 			label = "BIASA"
 		
-	return render_template('fungsi1.html', text_in = text_in, label = label, title='Fungsi 1')
+	return render_template('fungsi1.html', text_in = text_in, label = label, title='Fungsi 1', footer = footer)
     
     
 @app.route('/fungsi_2', methods = ['POST', 'GET'])
 def fungsi_2():
+	footer = True
 	berkas, hasil = None, None
 	hs = []
 	cb = []
@@ -89,6 +96,7 @@ def fungsi_2():
 		df = clean(berkas.filename)
 		r_hs = predict('hs', df['Message'])
 		r_cb = predict('cb', df['Message'])
+		footer = False
 	
 		
 		for i in range(len(df)):
@@ -108,10 +116,11 @@ def fungsi_2():
 			r = {'nama': i, 'hs': (hs.count(i)/tot_data)*100, 'cb': (cb.count(i)/tot_data)*100, 'bb': (bb.count(i)/tot_data)*100}
 			hasil.append(r)
 	
-	return render_template('fungsi2.html',  hasil=hasil, title='Fungsi 2')
+	return render_template('fungsi2.html',  hasil=hasil, title='Fungsi 2', footer = footer)
 	
 @app.route('/fungsi_3', methods = ['POST', 'GET'])
 def fungsi_3():
+	footer = True
 	text_in, label, balik = None, None, None
 	if request.method == 'POST':
 		text_in = request.form['text-in']
@@ -121,6 +130,7 @@ def fungsi_3():
 		text_in = [text_in]
 		result_hs = predict('hs', text_in)
 		result_cb = predict('cb', text_in)
+		footer = False
 		
 		if (result_hs[0][0] > 0.5):
 			label = "HATE SPEECH"
@@ -131,7 +141,7 @@ def fungsi_3():
 		else:
 			label = "BIASA"
 		
-	return render_template('fungsi3.html', text_in = text_in, balik = balik, label = label, title='Fungsi 3')
+	return render_template('fungsi3.html', text_in = text_in, balik = balik, label = label, title='Fungsi 3', footer = footer)
 
 @app.route('/tentang')
 def tentang():

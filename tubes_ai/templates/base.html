@@ -69,19 +69,20 @@
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					  <span class="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						  <ul class="navbar-nav inline">
 								<li class="nav-item me-4">
 								  <a class="nav-link {% if title == 'Home' %} active fw-bold{% endif %}" href="{{ url_for('index') }}">Home</a>
 								</li>
-								<li class="nav-item me-4">
-								  <a class="nav-link {% if title == 'Fungsi 1' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_1') }}">Fungsi 1</a>
-								</li>
-								<li class="nav-item me-4">
-								  <a class="nav-link {% if title == 'Fungsi 2' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_2') }}">Fungsi 2</a>
-								</li>
-								<li class="nav-item me-4">
-								  <a class="nav-link {% if title == 'Fungsi 3' %} active fw-bold{% endif %}" href="{{ url_for('fungsi_3') }}">Fungsi 3</a>
+								<li class="nav-item dropdown me-4">
+									<a class="nav-link dropdown-toggle {% if 'Fungsi' in title %} active fw-bold{% endif %}" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										Daftar Fungsi
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item" href="{{ url_for('fungsi_1') }}">Fungsi 1</a></li>
+										<li><a class="dropdown-item" href="{{ url_for('fungsi_2') }}">Fungsi 2</a></li>
+										<li><a class="dropdown-item" href="{{ url_for('fungsi_3') }}">Fungsi 3</a></li>
+									</ul>
 								</li>
 								<li class="nav-item">
 								  <a class="nav-link {% if title == 'Tentang' %} active fw-bold{% endif %}" href="{{ url_for('tentang') }}">Tentang</a>
@@ -94,7 +95,7 @@
 		{% block content %} {% endblock %}
 		
 		<!-- footer -->
-		<div class="container mt-5 p-4 small text-center">
+		<div class="container mt-5 p-4 small text-center {% if footer %} fixed-bottom {% endif %}">
 			<div class="col-sm">
 				@2021 | <b>Kelompok Gatau</b><br>
 				Powered by <b>Flask & Bootstrap</b>

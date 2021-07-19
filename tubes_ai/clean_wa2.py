@@ -1,12 +1,11 @@
-#Import library
+#import library
 import re
 import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 #split date
 def startsWithDateTime(s):
-    patterns = ['([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(\d{2}|\d{4}), ([0-9][0-9]):([0-9][0-9]) -', '^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(\d{2}|\d{4}) ([0-9][0-9]).([0-9][0-9]) -']
-    pattern = '^' + '|'.join(patterns)
+    pattern = '^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(\d{2}|\d{4}), ([0-9][0-9]):([0-9][0-9]) -'
     result = re.match(pattern, s)
     if result:
         return True
@@ -32,7 +31,7 @@ def getDataPoint(line):
 	#split time
     splitLine = line.split(' - ')
     dateTime = splitLine[0]
-    date, time = dateTime.split(' ')
+    date, time = dateTime.split(', ')
     #split message
     message = ' '.join(splitLine[1:])
     
@@ -55,6 +54,8 @@ def lowercase(text):
 #remove unnecessary char
 def remove_unnecessary_char(text):
     text = re.sub('\n',' ',text) # Remove every '\n'
+    text = re.sub('rt',' ',text) # Remove every retweet symbol
+    text = re.sub('user',' ',text) # Remove every username
     text = re.sub('((www\.[^\s]+)|(https?://[^\s]+)|(http?://[^\s]+))',' ',text) # Remove every URL
     text = re.sub('  +', ' ', text) # Remove extra spaces
     return text
@@ -76,11 +77,12 @@ def preprocess(text):
     text = stemming(text) # 4
     return text
 
+
 #clean
 def clean(path_file):
 	parsedData = []
-	conversationPath = "file_up/"+path_file    #path ke file
-	with open(conversationPath, encoding="latin1") as fp:
+	conversationPath = 'file_up/'+path_file
+	with open(conversationPath, encoding="utf-8") as fp:
 		fp.readline()
 			
 		messageBuffer = []
@@ -94,7 +96,6 @@ def clean(path_file):
 			if startsWithDateTime(line):
 				if len(messageBuffer) > 0:
 					parsedData.append([date, time, author, ' '.join(messageBuffer)])
-     
 				messageBuffer.clear()
 				date, time, author, message = getDataPoint(line)
 				messageBuffer.append(message)
