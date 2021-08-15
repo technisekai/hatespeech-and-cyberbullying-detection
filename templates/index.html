@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+		<!-- Title -->
+		<div class="container-fl p-4 vh-100 d-flex align-items-center justify-content-center flex-column">
+			<div class="row p-5 d-flex align-items-center">
+				<div class="col-sm">
+					<img src="{{ url_for('static', filename='assets/img/thumbnail.png') }}" style="width: 80%;">
+				</div>
+				<div class="col-sm">
+					<span class="fs-1 fw-bold text-blue">Hate Speech & Cyber Bullying Detection</span>
+					<p class="mt-4">
+						Sebuah program pendeteksi <span class="text-red fw-bold">hate speech</span> dan <span class="text-yellow fw-bold">cyber bullying</span> berbasis web
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="container ps-5 pe-5 text-center">
+			<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Mari Berkenalan dengan Fungsi yang Kami Buat</label>
+			<div class="row row-cols-1 row-cols-md-3 g-4 mt-3 ps-5 pe-5 ">
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 1</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis inputan dari user dan melakukan klasifikasi apakah termasuk hate speech, cyberbullying, atau biasa saja.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 2</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis chat group whatsapp dari user dan melakukan klasifikasi berapa persen pengguna melakukan hate speech, cyberbullying, dan biasa saja.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card bg-white text-dark h-100">
+						<div class="card-body">
+							<h5 class="card-title fw-bold">Fungsi 3</h5>
+							<p class="card-text">
+								Fungsi ini akan menganalisis inputan dari user dan jika terdeteksi hate speech atau cyberbullying maka kalimat akan diubah menjadi makna yang lebih indah.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{%  endblock %}

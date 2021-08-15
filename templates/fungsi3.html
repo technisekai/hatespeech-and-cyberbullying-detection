@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}		
+	<div class="container mt-5 pt-5 justify-content-center">
+		<div class="row pt-4 justify-content-center text-center">
+			<div class="col-sm-7">
+				<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Fungsi 3</label>
+				<p class="mt-4 small">Klasifikasi inputan dari pengguna dan mengubah inputan bermakna lebih indah</p>
+			</div>
+		</div>
+		<div class="row justify-content-center text-center">
+			<div class="col-sm-7">
+				<form action = "{{ url_for('fungsi_3') }}" method = "post">
+                       <input type="text" class="form-control bg-dark text-light" name="text-in">
+                       <br>
+                       <button type="submit" class="btn btn-primary">Kirim</button>
+				</form>
+				{% if text_in %}
+					<div class="row mt-4">
+						<div class = "col-sm">
+							<div class="card text-white mb-3 mt-3 border-0 text-start" style="max-width: 40rem;">
+								<div class="card-header {% if label == 'HATE SPEECH' %} bg-danger {% elif label == 'BULLYING' %} bg-warning {% else %} bg-cyan text-gelap{% endif %}">Result</div>
+								<div class="card-body bg-gelap">
+									<h5 class="card-title fw-bold"> {{ label }}</h5>
+									<p class="card-text">{{ text_in[0] }}</p>
+								</div>
+							</div>
+						</div>
+						{% if label != "BIASA" %}
+							<div class=col-sm>
+								<div class="card text-white mb-3 mt-3 border-0 text-start" style="max-width: 40rem;">
+									<div class="card-header bg-cyan text-gelap">Saran kalimat ganti</div>
+									<div class="card-body bg-gelap">
+										<p class="card-text">{{ balik }}</p>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{%  endblock %}

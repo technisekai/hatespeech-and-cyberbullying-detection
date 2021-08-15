@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}		
+	<div class="container mt-5 pt-5">
+		<div class="row pt-4 justify-content-center text-center">
+			<div class="col-sm-6">
+				<label class="fs-2 border-bottom border-5 fw-bold text-cyan">Fungsi 1</label>
+				<p class="mt-4 small">Klasifikasi inputan dari pengguna</p>
+			</div>
+		</div>
+		<div class="row justify-content-center text-center">
+			<div class="col-sm-6">
+				<form action = "{{ url_for('fungsi_1') }}" method = "post">
+                       <input type="text" class="form-control bg-dark text-light" name="text-in">
+                       <br>
+                       <button type="submit" class="btn btn-primary">Kirim</button>
+				</form>
+				{% if text_in %}
+				<div class="card text-white mb-3 mt-4 border-0 text-start" style="max-width: 40rem;">
+					<div class="card-header {% if label == 'HATE SPEECH' %} bg-danger {% elif label == 'BULLYING' %} bg-warning {% else %} bg-cyan text-gelap{% endif %}">Result</div>
+					<div class="card-body bg-gelap">
+						<h5 class="card-title fw-bold"> {{ label }}</h5>
+						<p class="card-text">{{ text_in[0] }}</p>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{%  endblock %}
